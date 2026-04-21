@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>巴特爾遊戲人格測驗（八特質）</title>
-  <meta name="description" content="參考巴特爾遊戲人格測驗：完成 34 題後，結算八種特質分數。" />
+  <meta name="description" content="參考巴特爾遊戲人格測驗：完成 34 題後，結算八種特質分數，並可下載結果圖片。" />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <meta name="theme-color" content="#0f1115" />
   <meta property="og:title" content="巴特爾遊戲人格測驗（八特質）" />
-  <meta property="og:description" content="完成 34 題後結算八種特質分數。" />
+  <meta property="og:description" content="完成 34 題後結算八種特質分數，並可下載結果圖片。" />
   <meta property="og:image" content="logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="logo.png" />
@@ -343,7 +343,7 @@
     <header>
       <div class="brand">
         <h1>巴特爾遊戲人格測驗（八特質）</h1>
-        <p>本測驗參考了巴特爾遊戲人格測驗；一個人可以同時有多種取向，分數僅供參考。做完 34 題後會結算八種特質分數。</p>
+        <p>本測驗參考了巴特爾遊戲人格測驗，娛樂向，請勿迷信。一個人可以同時有多種取向，分數僅供參考。做完 34 題後會結算八種特質分數。</p>
       </div>
       <div class="pill" aria-label="狀態資訊">
         <span class="mono" id="pillState">待開始</span>
@@ -539,7 +539,7 @@
         <div class="cardInner">
           <div class="sectionTitle">
             <h2>結算結果</h2>
-            <span class="hint">顯示八種特質分數</span>
+            <span class="hint">可下載結果圖片（PNG）</span>
           </div>
 
           <div class="resultCard" id="shareCard" aria-label="結果卡片">
@@ -555,6 +555,7 @@
           </div>
 
           <div class="shareRow">
+            <button class="primary" id="downloadResultBtn">下載結果圖片（PNG）</button>
             <button class="ghost" id="restartBtn">再測一次</button>
           </div>
         </div>
@@ -562,6 +563,7 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
   <script>
     // ====== 資料：特質解說 ======
     const TRAITS = [
@@ -708,6 +710,7 @@
       resultBadge: document.getElementById("resultBadge"),
       resultSubtitle: document.getElementById("resultSubtitle"),
       resultFoot: document.getElementById("resultFoot"),
+      downloadResultBtn: document.getElementById("downloadResultBtn"),
       restartBtn: document.getElementById("restartBtn"),
       shareCard: document.getElementById("shareCard"),
     };
@@ -982,6 +985,57 @@
       el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
     }
 
+    async function downloadResultImage(){
+      try{
+        if(typeof window.html2canvas !== "function"){
+          showToast("下載圖片功能載入中，請稍後再試一次。", "danger");
+          return;
+        }
+        el.downloadResultBtn.disabled = true;
+        el.downloadResultBtn.textContent = "產生中…";
+
+        // 複製結果卡片到離屏容器，避免陰影/外框影響截圖邊界
+        const off = document.createElement("div");
+        off.style.position = "fixed";
+        off.style.left = "-99999px";
+        off.style.top = "0";
+        off.style.width = "1060px";
+        off.style.padding = "20px";
+        off.style.background = getComputedStyle(document.body).background || "#0f1115";
+        off.style.color = "white";
+        off.style.fontFamily = getComputedStyle(document.body).fontFamily;
+        off.style.zIndex = "999999";
+
+        const clone = el.shareCard.cloneNode(true);
+        clone.style.boxShadow = "none";
+        off.appendChild(clone);
+        document.body.appendChild(off);
+
+        const canvas = await window.html2canvas(clone, {
+          backgroundColor: null,
+          scale: Math.min(2, window.devicePixelRatio || 1.5),
+          useCORS: true
+        });
+        document.body.removeChild(off);
+
+        const dataUrl = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        const now = new Date();
+        const file = `巴特爾人格測驗_結果_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,"0")}${String(now.getDate()).padStart(2,"0")}_${String(now.getHours()).padStart(2,"0")}${String(now.getMinutes()).padStart(2,"0")}.png`;
+        a.href = dataUrl;
+        a.download = file;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        showToast("已下載 PNG。");
+      }catch(err){
+        showToast("產生圖片失敗，請再試一次。", "danger");
+      }finally{
+        el.downloadResultBtn.disabled = false;
+        el.downloadResultBtn.textContent = "下載結果圖片（PNG）";
+      }
+    }
+
     function startFresh(){
       state.answers = Array(QUESTIONS.length).fill(null);
       state.idx = 0;
@@ -1036,6 +1090,8 @@
         startQuiz(false);
       }
     });
+
+    el.downloadResultBtn.addEventListener("click", downloadResultImage);
 
     // 鍵盤操作（左右換題）
     window.addEventListener("keydown", (e) => {
