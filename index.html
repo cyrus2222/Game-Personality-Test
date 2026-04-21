@@ -487,10 +487,6 @@
               <div class="label">作答</div>
               <div class="value">每題 <span class="mono">4</span> 選 <span class="mono">1</span></div>
             </div>
-            <div class="kpiItem">
-              <div class="label">無效判定</div>
-              <div class="value"><span class="mono">第1題選2</span> 或 <span class="mono">第34題選1</span></div>
-            </div>
           </div>
 
           <div class="ctaRow">
@@ -1083,7 +1079,6 @@
       }
       renderResults();
     });
-狀況狀況
     el.restartBtn.addEventListener("click", () => {
       if(confirm("要重新開始測驗嗎？（會清除本次作答）")){
         startFresh();
