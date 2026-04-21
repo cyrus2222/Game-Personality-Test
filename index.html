@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>巴特爾遊戲人格測驗（八特質）</title>
+  <meta name="description" content="參考巴特爾遊戲人格測驗：完成 34 題後，結算八種特質分數並可分享結果圖片。" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <meta name="theme-color" content="#0f1115" />
+  <meta property="og:title" content="巴特爾遊戲人格測驗（八特質）" />
+  <meta property="og:description" content="完成 34 題後結算八種特質分數，並可分享結果圖片。" />
+  <meta property="og:image" content="logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="logo.png" />
+  <style>
+    :root{
+      --bg:#0f1115;
+      --card:#151a22;
+      --card2:#12161d;
+      --text:#e9edf5;
+      --muted:#a7b0c2;
+      --accent:#5b8cff;
+      --accent2:#5b8cff;
+      --danger:#ff5b6e;
+      --border: rgba(255,255,255,.09);
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius2: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg), #0a0c10 70%, #090b0f);
+      overflow-x:hidden;
+    }
+    a{ color: inherit; }
+    .wrap{ width:min(1060px, calc(100% - 32px)); margin: 28px auto 60px; }
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between;
+      margin-bottom: 18px;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .brand h1{
+      margin:0;
+      font-size: clamp(22px, 2.6vw, 30px);
+      letter-spacing:.3px;
+    }
+    .brand p{ margin:0; color: var(--muted); line-height:1.6; max-width: 64ch; }
+    .pill{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .pill span{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardInner{ padding: 18px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .pill{ justify-content:flex-start; }
+    }
+    .sectionTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 16px;
+      color: rgba(233,238,255,.95);
+      letter-spacing:.2px;
+    }
+    .hint{ color: var(--muted); font-size: 13px; line-height:1.6; }
+    .traits{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 720px){
+      .traits{ grid-template-columns: 1fr; }
+    }
+    .trait{
+      border: 1px solid var(--border);
+      background: var(--card2);
+      border-radius: var(--radius2);
+      padding: 12px 12px 12px;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .trait::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(520px 160px at 15% 0%, rgba(91,140,255,.12), transparent 62%);
+      opacity:.9;
+      pointer-events:none;
+      z-index:0;
+      transform: translateZ(0);
+    }
+    .trait h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .trait p{ margin:0; color: var(--muted); font-size: 13px; line-height:1.55; position:relative; z-index:1; }
+    .traitIcon{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,237,245,.92);
+    }
+    .traitIcon svg{
+      width: 20px;
+      height: 20px;
+      display:block;
+    }
+    .ctaRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+    button{
+      appearance:none;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 560;
+      letter-spacing:.05px;
+      line-height: 1.15;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+    }
+    button:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16); }
+    button:active{ transform: translateY(1px); }
+    button.primary{
+      border-color: rgba(91,140,255,.55);
+      background: rgba(91,140,255,.22);
+    }
+    button.primary:hover{
+      border-color: rgba(91,140,255,.78);
+      background: rgba(91,140,255,.28);
+    }
+    button.ghost{
+      background: transparent;
+      border-color: rgba(255,255,255,.14);
+    }
+    button.danger{
+      border-color: rgba(255,91,110,.48);
+      background: rgba(255,91,110,.18);
+    }
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+    }
+    .mono{ font-family: var(--mono); }
+    .muted{ color: var(--muted); }
+    .divider{ height:1px; background: var(--border); margin: 12px 0; }
+    .kpi{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 560px){
+      .kpi{ grid-template-columns: 1fr; }
+    }
+    .kpiItem{
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      border-radius: var(--radius2);
+      padding: 10px 12px;
+    }
+    .kpiItem .label{ font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .kpiItem .value{ font-size: 14px; font-weight: 750; }
+    .progress{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background: rgba(91,140,255,.95);
+      border-radius: 999px;
+      transition: width .2s ease;
+    }
+    .qBox{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.18);
+    }
+    .qMeta{
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .qTitle{
+      margin: 0 0 12px;
+      font-size: 17px;
+      letter-spacing:.2px;
+      line-height:1.5;
+    }
+    .choices{ display:flex; flex-direction:column; gap:10px; }
+    .choice{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      border-radius: 12px;
+      padding: 12px 12px;
+      cursor:pointer;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .choice:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .choice input{ margin-top: 2px; accent-color: var(--accent); }
+    .choice .txt{ line-height:1.55; }
+    .navRow{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top: 12px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .toast{
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(233,238,255,.92);
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .toast.danger{
+      border-color: rgba(255,77,109,.40);
+      background: rgba(255,77,109,.10);
+    }
+    .resultsGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    @media (max-width: 720px){
+      .resultsGrid{ grid-template-columns: 1fr; }
+    }
+    .barRow{
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    .barHeader{
+      display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+      margin-bottom: 8px;
+    }
+    .barHeader .name{ font-weight: 800; letter-spacing:.2px; }
+    .barHeader .score{ font-family: var(--mono); color: rgba(233,238,255,.92); }
+    .bar{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+    .small{ font-size: 12px; color: var(--muted); line-height:1.6; }
+    .resultCard{
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.10));
+    }
+    .resultHeader{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .resultHeader h2{ margin:0; font-size: 18px; }
+    .badge{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: rgba(233,238,255,.92);
+      white-space:nowrap;
+    }
+    .shareRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+    .imgOut{
+      margin-top: 12px;
+      display:none;
+    }
+    .imgOut img{
+      max-width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .footerNote{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .srOnly{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+      clip: rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>巴特爾遊戲人格測驗（八特質）</h1>
+        <p>本測驗參考了巴特爾遊戲人格測驗；一個人可以同時有多種取向，分數僅供參考。做完 34 題後會結算八種特質分數，並可把結果分享成圖片。</p>
+      </div>
+      <div class="pill" aria-label="狀態資訊">
+        <span class="mono" id="pillState">待開始</span>
+        <span class="mono" id="pillProgress">0 / 34</span>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card" id="homeView">
+        <div class="cardInner">
+          <div class="sectionTitle">
+            <h2>八種特質解說</h2>
+            <span class="hint">完成後會顯示每項分數（0～16）</span>
+          </div>
+
+          <div class="traits" id="traitsList"></div>
+
+          <div class="divider"></div>
+
+          <div class="kpi" aria-label="測驗資訊">
+            <div class="kpiItem">
+              <div class="label">題數</div>
+              <div class="value"><span class="mono">34</span> 題</div>
+            </div>
+            <div class="kpiItem">
+              <div class="label">作答</div>
+              <div class="value">每題 <span class="mono">4</span> 選 <span class="mono">1</span></div>
+            </div>
+
+          <div class="ctaRow">
+            <button class="primary" id="startBtn">開始測驗</button>
+            <button class="ghost" id="continueBtn" disabled>繼續上次作答</button>
+            <button class="danger" id="resetBtn" disabled>清除作答紀錄</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="quizView" style="display:none;">
+        <div class="cardInner">
+          <div class="sectionTitle">
+            <h2>作答中</h2>
+            <span class="hint" id="quizHint">請選 1 個選項</span>
+          </div>
+
+          <div class="progress" aria-label="進度條"><div id="progressBar"></div></div>
+          <div style="height:10px"></div>
+
+          <div class="qBox">
+            <div class="qMeta">
+              <div><span class="mono" id="qIndex">1</span><span class="muted"> / </span><span class="mono">34</span></div>
+              <div class="mono" id="qSaved">未作答</div>
+            </div>
+            <h3 class="qTitle" id="qTitle"></h3>
+            <div class="choices" id="choices"></div>
+          </div>
+
+          <div class="navRow">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="ghost" id="prevBtn">上一題</button>
+              <button class="ghost" id="nextBtn">下一題</button>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="danger" id="quitBtn">回首頁</button>
+              <button class="primary" id="finishBtn" disabled>完成並結算</button>
+            </div>
+          </div>
+
+          <div class="toast" id="toast" style="display:none;"></div>
+        </div>
+      </section>
+
+      <section class="card" id="resultView" style="display:none;">
+        <div class="cardInner">
+          <div class="sectionTitle">
+            <h2>結算結果</h2>
+            <span class="hint">可下載/分享成圖片</span>
+          </div>
+
+          <div class="resultCard" id="shareCard" aria-label="可分享的結果卡片">
+            <div class="resultHeader">
+              <div>
+                <h2>你的八特質分數</h2>
+                <div class="small" id="resultSubtitle"></div>
+              </div>
+              <div class="badge" id="resultBadge">有效</div>
+            </div>
+            <div class="resultsGrid" id="resultsGrid"></div>
+            <div class="footerNote" id="resultFoot"></div>
+          </div>
+
+          <div class="shareRow">
+            <button class="primary" id="shareImgBtn">產生分享圖片（PNG）</button>
+            <button class="ghost" id="downloadImgBtn" disabled>下載圖片</button>
+            <button class="ghost" id="copyImgBtn" disabled>複製圖片到剪貼簿</button>
+            <button class="ghost" id="restartBtn">再測一次</button>
+          </div>
+
+          <div class="imgOut" id="imgOut">
+            <div class="small muted">預覽（你也可以右鍵另存）</div>
+            <div style="height:8px"></div>
+            <img id="imgPreview" alt="測驗結果分享圖片預覽" />
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 產生圖片用（本地端繪製，不上傳） -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+
+  <script>
+    // ====== 資料：特質解說 ======
+    const TRAITS = [
+      {
+        key: "diplomat",
+        name: "外交者",
+        desc: "為了功利、資訊或結交有能力者而去交友，朋友範圍可能很廣",
+        color: "linear-gradient(90deg, rgba(124,92,255,.95), rgba(124,92,255,.45))"
+      },
+      {
+        key: "friend",
+        name: "交友者",
+        desc: "主打情感羈絆，不求朋友多，單純享受與朋友相處",
+        color: "linear-gradient(90deg, rgba(53,208,186,.95), rgba(53,208,186,.45))"
+      },
+      {
+        key: "opportunist",
+        name: "投機者",
+        desc: "單純想完成遊戲玩法（神裝、排行榜、成就等），傾向到處亂逛，遇到就破解",
+        color: "linear-gradient(90deg, rgba(255,194,71,.95), rgba(255,194,71,.40))"
+      },
+      {
+        key: "executor",
+        name: "執行者",
+        desc: "更落實於玩法且重效率；有目標、計較效益，可能仰賴實驗者攻略",
+        color: "linear-gradient(90deg, rgba(82,154,255,.95), rgba(82,154,255,.40))"
+      },
+      {
+        key: "experimenter",
+        name: "實驗者",
+        desc: "有目的地研究遊戲內容：鑽漏洞、挖彩蛋、研究效益，也是攻略產出者",
+        color: "linear-gradient(90deg, rgba(255,119,214,.95), rgba(255,119,214,.40))"
+      },
+      {
+        key: "adventurer",
+        name: "冒險者",
+        desc: "靠直覺與隨機探索，享受於試錯",
+        color: "linear-gradient(90deg, rgba(124,255,159,.95), rgba(124,255,159,.35))"
+      },
+      {
+        key: "controller",
+        name: "掌控者",
+        desc: "喜歡支配、有明確目的：帶領公會戰、當指揮或掌握交易所",
+        color: "linear-gradient(90deg, rgba(255,102,102,.95), rgba(255,102,102,.35))"
+      },
+      {
+        key: "destroyer",
+        name: "破壞者",
+        desc: "享受引發混亂、惡搞、擊殺等；需要存在其他玩家才有事可做（通常比例不高）",
+        color: "linear-gradient(90deg, rgba(180,180,180,.95), rgba(180,180,180,.35))"
+      }
+    ];
+
+    // ====== 資料：題庫（固定 4 選） ======
+    const QUESTIONS = [
+      { id: 1,  title: "題目1。你在遊戲中是否曾經遭遇挫折？", options: ["有過這種經驗。","從未有過挫折。","遊戲本來就不該有挫折感。","每天都感到挫折。"] },
+      { id: 2,  title: "題目2。進入新遊戲。你優先採取什麼行動？", options: ["在公開頻道尋找大型公會加入。","邀請朋友一起創立角色。","檢視成就列表與裝備掉落資訊。","尋找最高效率的新手升級攻略。"] },
+      { id: 3,  title: "題目3。面對困難關卡或BOSS。你傾向如何應對？", options: ["請求高等級玩家協助。","與親友嘗試通關。","四處閒晃尋找隱藏獎勵或去做別的事。","研究角色數值和技能並找出最佳解法。"] },
+      { id: 4,  title: "題目4。取得稀有道具。你通常如何處置？", options: ["拿去與其他人交易。","贈送給一起遊玩的親密夥伴。","保留下來以後衝榜。","先裝備來增加打怪效率。"] },
+      { id: 5,  title: "題目5。遊戲舉辦大型活動。你專注於什麼？", options: ["趁機結識知名玩家。","與親友約定時間參與活動。","隨意逛逛並尋找隱藏彩蛋。","研究活動以獲取全部活動獎勵。"] },
+      { id: 6,  title: "題目6。選擇公會。你最看重哪種特質？", options: ["能提供最多情報與人脈的大公會。","氣氛融洽且成員互相熟悉的小公會。","制度寬鬆且不強迫解任務的公會。","具備明確目標且攻略進度最快的公會。"] },
+      { id: 7,  title: "題目7。每日任務重置。你安排什麼流程？", options: ["尋找排行榜高手組隊快速通關。","等待好友上線再共同進行任務。","隨機挑選幾個感興趣的任務完成。","規劃最省時的路線一次解決所有任務。"] },
+      { id: 8,  title: "題目8。遊戲伺服器延遲。你會怎麼反應？", options: ["前往論壇與其他玩家交換情報。","在語音群組與好友聊天等待修復。","關掉去玩別的遊戲。","整理接下來的角色成長計畫。"] },
+      { id: 9,  title: "題目9。遇見新手求助。你採取什麼行動？", options: ["提供幫助並順勢邀請對方加入公會。","熱心陪伴對方解任務並互加好友。","告訴對方下一步好做的事情。","傳送最完整的攻略文章給對方閱讀。"] },
+      { id: 10, title: "題目10。探索全新地圖。你優先執行什麼？", options: ["測試地圖是否存在漏洞。","憑直覺選擇一條路線開始探索。","指揮隊伍有條理地推進探索進度。","引導怪物走向其他玩家以觀察互動。"] },
+      { id: 11, title: "題目11。獲得未知技能。你如何測試效果？", options: ["記錄每次施放的詳細傷害數據。","立刻尋找周圍怪物直接施放。","思考如何將此技能排進團隊戰術。","對陌生玩家施放以觀察非預期效果。"] },
+      { id: 12, title: "題目12。參與大型團隊戰。你扮演什麼角色？", options: ["嘗試前人未見的奇異裝備組合。","不依賴地圖並憑直覺支援隊友。","擔任指揮官調度全場玩家行動。","採取非典型戰術製造對手預期外的變數。"] },
+      { id: 13, title: "題目13。參與遊戲內經濟系統。你採取什麼策略？", options: ["測試物價波動的極限與系統機制。","隨心所欲進行買賣而不計較金幣。","壟斷特定物資以掌控全伺服器市場。","大量拋售物資使價格崩盤。"] },
+      { id: 14, title: "題目14。遭遇系統Bug。你作何反應？", options: ["反覆測試Bug的完整觸發條件。","覺得有趣並直接忽略該狀況繼續遊玩。","聯繫官方回報並要求全服補償。","運用系統漏洞介入他人的遊戲進程。"] },
+      { id: 15, title: "題目15。角色達到滿級。你設定什麼新目標？", options: ["找出所有隱藏的系統機制。","踏遍地圖上每一個未知的角落。","成為伺服器中有影響力的人。","在野外主動發起無預警的玩家對抗。"] },
+      { id: 16, title: "題目16。選擇職業。你偏好哪種類型？", options: ["技能機制繁瑣且需研究的職業。","外觀順眼且操作直覺隨性的職業。","最適合擔任團隊領袖的輔助職業。","具備高度干擾能力與控制技能的職業。"] },
+      { id: 17, title: "題目17。面對首領。你採取什麼戰鬥方式？", options: ["測試首領的仇恨機制與攻擊死角。","不看攻略直接進場體驗戰鬥過程。","分配每位隊員的站位與具體任務。","在關鍵時刻做出意料之外的舉動。"] },
+      { id: 18, title: "題目18。推出新副本。你如何應對？", options: ["跟有在研究攻略的人研究打法。","優先獲取新副本的首次通關獎勵。","測試新副本裝備的數值。","在新副本中指揮大家通關。"] },
+      { id: 19, title: "題目19。建立角色的首要考量。你關注什麼？", options: ["此角色是否具備廣泛的社交價值。","此角色是否容易達成各項成就。","此角色的數值成長曲線與潛力。","此角色在公會戰中的戰略指揮價值。"] },
+      { id: 20, title: "題目20。遇見需要大家搶貨的稀有商人。你採取什麼行動？", options: ["將商人座標分享給公會幹部。","買下所有自身需要的物品後離開。","測試商人是否會刷新其他隱藏物品。","派人封鎖該區域不讓其他玩家靠近。"] },
+      { id: 21, title: "題目21。官方削弱你的職業。你如何反應？", options: ["向其他職業的玩家請教其他職業。","直接轉換至當前版本最強的職業。","研究削弱變化。","帶領群眾向官方抗議並要求撤回改動。"] },
+      { id: 22, title: "題目22。舉辦個人活動。你會怎麼規劃？", options: ["邀請各路好手參與以擴展人脈。","設置豐厚獎勵吸引大量人潮參與。","設計規則繁瑣且具實驗性質的競賽。","訂定嚴格規範並親自擔任最高裁判。"] },
+      { id: 23, title: "題目23。選擇陣營。你考量什麼條件？", options: ["選擇最多知名玩家加入的陣營。","選擇勝率最高且獎勵最豐厚的陣營。","選擇人數最少以測試弱勢加成機制。","選擇能讓你順利當上領袖的陣營。"] },
+      { id: 24, title: "題目24。獲得多餘資源。你如何處置？", options: ["拿去與其他人交易。","出售換取金幣。","嘗試合成以期產出未知的道具。","存放在公會金庫並進行統一管理。"] },
+      { id: 25, title: "題目25。看見兩大公會爆發衝突。你採取什麼行動？", options: ["居中協調並試圖獲取雙方信任。","趁亂撿取掉落的稀有裝備與物資。","觀察雙方運用的戰略與技能組合。","暗中支持一方以改變伺服器勢力版圖。"] },
+      { id: 26, title: "題目26。週末上線計畫。你安排什麼行程？", options: ["與好友在風景優美的地方掛機聊天。","按表操課完成所有每週限定任務。","沒有既定計畫且想到哪就去哪。","尋找正在解任務的玩家並進行干預。"] },
+      { id: 27, title: "題目27。佈置個人房屋。你重視什麼元素？", options: ["營造溫馨空間讓親友隨時來作客。","只放置能增加角色數值的傢俱。","隨意擺放只要當下看得順眼即可。","在房屋周圍設置意想不到的干擾機關。"] },
+      { id: 28, title: "題目28。選擇坐騎。你偏好哪種外觀？", options: ["好友們都擁有的同款兄弟坐騎。","移動速度最快且最節省時間的坐騎。","長相最奇特且充滿隨機元素的坐騎。","視覺風格強烈且引人注目的坐騎。"] },
+      { id: 29, title: "題目29。收到隨機組隊邀請。你如何決定？", options: ["只要是好友邀請就立刻答應加入。","先確認隊伍的職業配置與明確目標。","直接加入看看會發生什麼有趣的事。","加入隊伍並嘗試常規外的戰鬥風格。"] },
+      { id: 30, title: "題目30。購買時裝。你挑選什麼風格？", options: ["購買能與好友搭配的情侶裝或團體服。","拒絕購買對戰鬥力沒有實質幫助的時裝。","隨意購買一件當下覺得好看的服飾。","穿著風格特異的服裝引發他人關注。"] },
+      { id: 31, title: "題目31。參與語音頻道。你展現什麼發言習慣？", options: ["專注於與熟悉的親友進行交流。","專注於溝通戰術與回報敵人位置。","聽到有趣的對話就隨性插話互動。","播放特殊音效觀察頻道的群體反應。"] },
+      { id: 32, title: "題目32。參與野外首領戰。你專注於什麼操作？", options: ["留在安全區域幫好友補血打氣。","精準計算傷害以搶奪最後一擊獎勵。","不管機制直接上前展開攻擊。","干預首領的攻擊目標以製造戰局變數。"] },
+      { id: 33, title: "題目33。遊戲即將關閉伺服器。你進行什麼最後儀式？", options: ["與所有好友合影留念並互道再見。","將所有資源消耗完畢結算最終戰力。","走向地圖上從未涉足的偏僻角落。","在人口密集區引發大規模的非常規事件。"] },
+      { id: 34, title: "題目34。你如何填寫這份測驗？", options: ["完全不看題目隨機亂選。","依據自身真實想法選擇。","仔細思考每個選項。","憑直覺快速選擇。"] },
+    ];
+
+    // ====== 計分規則（題號區間 + 選項號） ======
+    // 選項號：1～4
+    // 外交者：2-9 選1 + 18-25 選1
+    // 交友者：2-9 選2 + 26-33 選1
+    // 投機者：2-9 選3 + 18-25 選2
+    // 執行者：2-9 選4 + 26-33 選2
+    // 實驗者：10-17 選1 + 18-25 選3
+    // 冒險者：10-17 選2 + 26-33 選3
+    // 掌控者：10-17 選3 + 18-25 選4
+    // 破壞者：10-17 選4 + 26-33 選4
+    const SCORE_RULES = [
+      { trait:"diplomat",     ranges: [{from:2,to:9, pick:1},{from:18,to:25,pick:1}] },
+      { trait:"friend",       ranges: [{from:2,to:9, pick:2},{from:26,to:33,pick:1}] },
+      { trait:"opportunist",  ranges: [{from:2,to:9, pick:3},{from:18,to:25,pick:2}] },
+      { trait:"executor",     ranges: [{from:2,to:9, pick:4},{from:26,to:33,pick:2}] },
+      { trait:"experimenter", ranges: [{from:10,to:17,pick:1},{from:18,to:25,pick:3}] },
+      { trait:"adventurer",   ranges: [{from:10,to:17,pick:2},{from:26,to:33,pick:3}] },
+      { trait:"controller",   ranges: [{from:10,to:17,pick:3},{from:18,to:25,pick:4}] },
+      { trait:"destroyer",    ranges: [{from:10,to:17,pick:4},{from:26,to:33,pick:4}] },
+    ];
+
+    const STORAGE_KEY = "bartle8.quiz.v1";
+
+    // ====== 狀態 ======
+    const state = {
+      answers: Array(QUESTIONS.length).fill(null), // 每題存 1~4，或 null
+      idx: 0, // 0-based
+      lastGeneratedPng: null, // dataUrl
+    };
+
+    // ====== DOM ======
+    const el = {
+      pillState: document.getElementById("pillState"),
+      pillProgress: document.getElementById("pillProgress"),
+      homeView: document.getElementById("homeView"),
+      quizView: document.getElementById("quizView"),
+      resultView: document.getElementById("resultView"),
+      traitsList: document.getElementById("traitsList"),
+      startBtn: document.getElementById("startBtn"),
+      continueBtn: document.getElementById("continueBtn"),
+      resetBtn: document.getElementById("resetBtn"),
+      progressBar: document.getElementById("progressBar"),
+      qIndex: document.getElementById("qIndex"),
+      qSaved: document.getElementById("qSaved"),
+      qTitle: document.getElementById("qTitle"),
+      choices: document.getElementById("choices"),
+      prevBtn: document.getElementById("prevBtn"),
+      nextBtn: document.getElementById("nextBtn"),
+      finishBtn: document.getElementById("finishBtn"),
+      quitBtn: document.getElementById("quitBtn"),
+      toast: document.getElementById("toast"),
+      quizHint: document.getElementById("quizHint"),
+      resultsGrid: document.getElementById("resultsGrid"),
+      resultBadge: document.getElementById("resultBadge"),
+      resultSubtitle: document.getElementById("resultSubtitle"),
+      resultFoot: document.getElementById("resultFoot"),
+      shareImgBtn: document.getElementById("shareImgBtn"),
+      downloadImgBtn: document.getElementById("downloadImgBtn"),
+      copyImgBtn: document.getElementById("copyImgBtn"),
+      restartBtn: document.getElementById("restartBtn"),
+      shareCard: document.getElementById("shareCard"),
+      imgOut: document.getElementById("imgOut"),
+      imgPreview: document.getElementById("imgPreview"),
+    };
+
+    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
+    function answeredCount(){ return state.answers.filter(v => v != null).length; }
+    function isAllAnswered(){ return answeredCount() === QUESTIONS.length; }
+
+    function saveToStorage(){
+      try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          answers: state.answers,
+          idx: state.idx,
+        }));
+      }catch(_){}
+    }
+    function loadFromStorage(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return false;
+        const data = JSON.parse(raw);
+        if(!data || !Array.isArray(data.answers) || data.answers.length !== QUESTIONS.length) return false;
+        state.answers = data.answers.map(v => (v==null? null : Number(v)));
+        state.idx = clamp(Number(data.idx ?? 0), 0, QUESTIONS.length-1);
+        return true;
+      }catch(_){
+        return false;
+      }
+    }
+    function clearStorage(){
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(_){}
+    }
+
+    function setView(view){
+      el.homeView.style.display = view === "home" ? "" : "none";
+      el.quizView.style.display = view === "quiz" ? "" : "none";
+      el.resultView.style.display = view === "result" ? "" : "none";
+
+      if(view === "home"){
+        el.pillState.textContent = "待開始";
+      }else if(view === "quiz"){
+        el.pillState.textContent = "作答中";
+      }else{
+        el.pillState.textContent = "已結算";
+      }
+      el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
+    }
+
+    function showToast(msg, kind="info"){
+      el.toast.textContent = msg;
+      el.toast.className = "toast" + (kind==="danger" ? " danger" : "");
+      el.toast.style.display = "";
+      window.clearTimeout(showToast._t);
+      showToast._t = window.setTimeout(() => { el.toast.style.display = "none"; }, 2600);
+    }
+
+    const TRAIT_ICONS = {
+      diplomat: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M8.2 12.3 5.4 9.6a2.2 2.2 0 0 0-3.1 3.1l4.2 4.2a2.2 2.2 0 0 0 3.1 0l2.0-2.0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15.8 12.3 18.6 9.6a2.2 2.2 0 0 1 3.1 3.1l-4.2 4.2a2.2 2.2 0 0 1-3.1 0l-2.0-2.0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.7 14.7 12 12.4l2.3 2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `,
+      friend: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 21s-7-4.4-9.2-8.8C1 8.9 3.2 6 6.4 6c1.7 0 3 .8 3.8 2 0 0 .9-2 3.8-2 3.2 0 5.4 2.9 3.6 6.2C19 16.6 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      `,
+      opportunist: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 4h10v4a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M7 8H5a2 2 0 0 0 2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M17 8h2a2 2 0 0 1-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 13v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `,
+      executor: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M8 6h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 12h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M3 6l1.2 1.2L6.8 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 12l1.2 1.2 2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 18l1.2 1.2 2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `,
+      experimenter: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M10 2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 2v6l-5.5 9a3 3 0 0 0 2.6 5h9.8a3 3 0 0 0 2.6-5L14 8V2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M8.5 14h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `,
+      adventurer: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+          <path d="M14.6 9.4 12.8 14.8 9.4 14.6 12 12l2.6-2.6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 3v2M21 12h-2M12 21v-2M3 12h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `,
+      controller: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 8l7-5 7 5v4a7 7 0 0 1-7 7 7 7 0 0 1-7-7V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M9.5 11.5 11 13l3.5-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `,
+      destroyer: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3a7 7 0 0 0-7 7c0 2.3 1.2 4.7 3.5 7.5l1.2 1.5h4.6l1.2-1.5C17.8 14.7 19 12.3 19 10a7 7 0 0 0-7-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M16.5 6.5 20 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M11 11h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `,
+      _default: `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 7v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      `
+    };
+
+    function renderTraits(){
+      el.traitsList.innerHTML = "";
+      for(const t of TRAITS){
+        const div = document.createElement("div");
+        div.className = "trait";
+        const icon = TRAIT_ICONS[t.key] || TRAIT_ICONS._default;
+        div.innerHTML = `<h3><span class="traitIcon" aria-hidden="true">${icon}</span>${escapeHtml(t.name)}</h3><p>${escapeHtml(t.desc)}</p>`;
+        el.traitsList.appendChild(div);
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+    }
+
+    function renderQuestion(){
+      const q = QUESTIONS[state.idx];
+      el.qIndex.textContent = String(state.idx + 1);
+      el.qTitle.textContent = q.title;
+      el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
+
+      const saved = state.answers[state.idx];
+      el.qSaved.textContent = saved ? `已選：${saved}` : "未作答";
+
+      const pct = (answeredCount() / QUESTIONS.length) * 100;
+      el.progressBar.style.width = `${pct.toFixed(2)}%`;
+
+      el.prevBtn.disabled = state.idx === 0;
+      el.nextBtn.disabled = state.idx === QUESTIONS.length - 1;
+      el.finishBtn.disabled = !isAllAnswered();
+
+      el.choices.innerHTML = "";
+      const name = "q" + q.id;
+
+      q.options.forEach((opt, i) => {
+        const n = i + 1;
+        const row = document.createElement("label");
+        row.className = "choice";
+        row.innerHTML = `
+          <input type="radio" name="${name}" value="${n}" ${saved===n ? "checked" : ""} />
+          <div class="txt"><span class="mono">${n}.</span> ${escapeHtml(opt)}</div>
+        `;
+        row.addEventListener("click", (e) => {
+          const input = row.querySelector("input");
+          if(input) input.checked = true;
+          setAnswer(state.idx, n);
+          e.preventDefault();
+          e.stopPropagation();
+        });
+        row.querySelector("input").addEventListener("change", () => setAnswer(state.idx, n));
+        el.choices.appendChild(row);
+      });
+    }
+
+    function setAnswer(qIdx, value){
+      state.answers[qIdx] = value;
+      saveToStorage();
+      el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
+      el.qSaved.textContent = `已選：${value}`;
+      el.finishBtn.disabled = !isAllAnswered();
+      const pct = (answeredCount() / QUESTIONS.length) * 100;
+      el.progressBar.style.width = `${pct.toFixed(2)}%`;
+    }
+
+    function gotoIdx(nextIdx){
+      state.idx = clamp(nextIdx, 0, QUESTIONS.length - 1);
+      saveToStorage();
+      renderQuestion();
+    }
+
+    function computeScores(){
+      const a = state.answers; // index 0 => Q1
+      const scores = Object.fromEntries(TRAITS.map(t => [t.key, 0]));
+
+      for(const rule of SCORE_RULES){
+        let sum = 0;
+        for(const r of rule.ranges){
+          for(let q = r.from; q <= r.to; q++){
+            const picked = a[q-1];
+            if(picked === r.pick) sum++;
+          }
+        }
+        scores[rule.trait] = sum;
+      }
+      // 無效：Q1 選2 或 Q34 選1
+      const invalid = (a[0] === 2) || (a[33] === 1);
+      return { scores, invalid };
+    }
+
+    function traitMax(traitKey){
+      // 依規則，最大題數：
+      // diplomat/opportunist： (2-9)=8 + (18-25)=8 => 16
+      // friend/executor: (2-9)=8 + (26-33)=8 => 16
+      // experimenter/controller: (10-17)=8 + (18-25)=8 => 16
+      // adventurer/destroyer: (10-17)=8 + (26-33)=8 => 16
+      return 16;
+    }
+
+    function renderResults(){
+      const { scores, invalid } = computeScores();
+      const now = new Date();
+      const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")} ` +
+                    `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
+
+      el.resultBadge.textContent = invalid ? "無效問卷" : "有效";
+      el.resultBadge.style.borderColor = invalid ? "rgba(255,77,109,.55)" : "rgba(53,208,186,.45)";
+      el.resultBadge.style.background = invalid ? "rgba(255,77,109,.12)" : "rgba(53,208,186,.10)";
+
+      const sorted = TRAITS
+        .map(t => ({...t, score: scores[t.key], max: traitMax(t.key)}))
+        .sort((a,b) => b.score - a.score);
+
+      const top = sorted.filter(s => s.score === sorted[0].score).map(s => s.name).slice(0, 3);
+      el.resultSubtitle.textContent = `時間：${stamp} · 已作答：${answeredCount()} / ${QUESTIONS.length} · 最高：${top.join("、")}`;
+
+      el.resultsGrid.innerHTML = "";
+      for(const item of sorted){
+        const row = document.createElement("div");
+        row.className = "barRow";
+        row.innerHTML = `
+          <div class="barHeader">
+            <div class="name">${escapeHtml(item.name)}</div>
+            <div class="score"><span>${item.score}</span> / <span class="muted">${item.max}</span></div>
+          </div>
+          <div class="bar"><div></div></div>
+          <div class="small" style="margin-top:8px;">${escapeHtml(item.desc)}</div>
+        `;
+        const bar = row.querySelector(".bar > div");
+        bar.style.background = item.color;
+        bar.style.width = `${(item.score / item.max) * 100}%`;
+        el.resultsGrid.appendChild(row);
+      }
+
+      const invalidHint = invalid
+        ? `無效原因：${state.answers[0]===2 ? "第1題選到「2」" : ""}${(state.answers[0]===2 && state.answers[33]===1) ? "；" : ""}${state.answers[33]===1 ? "第34題選到「1」" : ""}。`
+        : "此結果僅供參考；你可能同時具有多種取向。";
+      el.resultFoot.textContent = invalidHint + "（分享圖片不會上傳到伺服器）";
+
+      // reset share outputs
+      state.lastGeneratedPng = null;
+      el.downloadImgBtn.disabled = true;
+      el.copyImgBtn.disabled = true;
+      el.imgOut.style.display = "none";
+      el.imgPreview.removeAttribute("src");
+
+      setView("result");
+    }
+
+    function updateHomeButtons(){
+      const hasSaved = state.answers.some(v => v != null);
+      el.continueBtn.disabled = !hasSaved;
+      el.resetBtn.disabled = !hasSaved;
+      el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
+    }
+
+    async function ensureHtml2Canvas(){
+      // 等待 defer 的 html2canvas 載入
+      const start = Date.now();
+      while(typeof window.html2canvas !== "function"){
+        if(Date.now() - start > 5000) throw new Error("圖片產生工具載入失敗（html2canvas）");
+        await new Promise(r => setTimeout(r, 50));
+      }
+    }
+
+    function dataUrlToBlob(dataUrl){
+      const [meta, b64] = dataUrl.split(",");
+      const mime = (meta.match(/data:(.*?);base64/) || [])[1] || "image/png";
+      const bin = atob(b64);
+      const len = bin.length;
+      const arr = new Uint8Array(len);
+      for(let i=0;i<len;i++) arr[i] = bin.charCodeAt(i);
+      return new Blob([arr], { type: mime });
+    }
+
+    async function generateShareImage(){
+      await ensureHtml2Canvas();
+
+      // 避免外框陰影影響截圖邊界：複製一份到離屏容器
+      const off = document.createElement("div");
+      off.style.position = "fixed";
+      off.style.left = "-99999px";
+      off.style.top = "0";
+      off.style.width = "1060px";
+      off.style.padding = "20px";
+      off.style.background = "linear-gradient(180deg, #0b1020, #070b17)";
+      off.style.color = "white";
+      off.style.fontFamily = getComputedStyle(document.body).fontFamily;
+      off.style.zIndex = "999999";
+
+      const clone = el.shareCard.cloneNode(true);
+      clone.style.boxShadow = "none";
+      clone.style.background = "linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))";
+      clone.style.border = "1px solid rgba(255,255,255,.14)";
+      off.appendChild(clone);
+      document.body.appendChild(off);
+
+      const canvas = await window.html2canvas(clone, {
+        backgroundColor: null,
+        scale: Math.min(2, window.devicePixelRatio || 1.5),
+        useCORS: true
+      });
+      document.body.removeChild(off);
+
+      const dataUrl = canvas.toDataURL("image/png");
+      state.lastGeneratedPng = dataUrl;
+      el.imgPreview.src = dataUrl;
+      el.imgOut.style.display = "";
+      el.downloadImgBtn.disabled = false;
+      el.copyImgBtn.disabled = false;
+      showToast("已產生 PNG，下面可預覽/下載/複製。");
+    }
+
+    function downloadShareImage(){
+      if(!state.lastGeneratedPng) return;
+      const a = document.createElement("a");
+      const now = new Date();
+      const file = `巴特爾人格測驗_結果_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,"0")}${String(now.getDate()).padStart(2,"0")}_${String(now.getHours()).padStart(2,"0")}${String(now.getMinutes()).padStart(2,"0")}.png`;
+      a.href = state.lastGeneratedPng;
+      a.download = file;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    async function copyShareImage(){
+      if(!state.lastGeneratedPng) return;
+      try{
+        const blob = dataUrlToBlob(state.lastGeneratedPng);
+        if(!navigator.clipboard || typeof window.ClipboardItem !== "function"){
+          showToast("此瀏覽器不支援直接複製圖片，請改用下載。", "danger");
+          return;
+        }
+        await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+        showToast("已複製圖片到剪貼簿。");
+      }catch(err){
+        showToast("複製失敗（可能需要 HTTPS 或瀏覽器權限）。請改用下載。", "danger");
+      }
+    }
+
+    function startFresh(){
+      state.answers = Array(QUESTIONS.length).fill(null);
+      state.idx = 0;
+      state.lastGeneratedPng = null;
+      clearStorage();
+      updateHomeButtons();
+      setView("home");
+    }
+
+    function startQuiz(fromSaved=false){
+      if(!fromSaved){
+        state.answers = Array(QUESTIONS.length).fill(null);
+        state.idx = 0;
+        saveToStorage();
+      }
+      setView("quiz");
+      renderQuestion();
+    }
+
+    // ====== 事件 ======
+    el.startBtn.addEventListener("click", () => startQuiz(false));
+    el.continueBtn.addEventListener("click", () => {
+      setView("quiz");
+      renderQuestion();
+      showToast("已繼續上次作答。");
+    });
+    el.resetBtn.addEventListener("click", () => {
+      if(confirm("確定要清除作答紀錄嗎？")){
+        startFresh();
+        showToast("已清除作答紀錄。");
+      }
+    });
+
+    el.prevBtn.addEventListener("click", () => gotoIdx(state.idx - 1));
+    el.nextBtn.addEventListener("click", () => gotoIdx(state.idx + 1));
+
+    el.quitBtn.addEventListener("click", () => {
+      setView("home");
+      updateHomeButtons();
+    });
+
+    el.finishBtn.addEventListener("click", () => {
+      if(!isAllAnswered()){
+        showToast("尚未作答完畢，無法結算。", "danger");
+        return;
+      }
+      renderResults();
+    });
+
+    el.shareImgBtn.addEventListener("click", async () => {
+      try{
+        el.shareImgBtn.disabled = true;
+        el.shareImgBtn.textContent = "產生中…";
+        await generateShareImage();
+      }catch(err){
+        showToast(String(err?.message || err || "產生圖片失敗"), "danger");
+      }finally{
+        el.shareImgBtn.disabled = false;
+        el.shareImgBtn.textContent = "產生分享圖片（PNG）";
+      }
+    });
+    el.downloadImgBtn.addEventListener("click", downloadShareImage);
+    el.copyImgBtn.addEventListener("click", copyShareImage);
+
+    el.restartBtn.addEventListener("click", () => {
+      if(confirm("要重新開始測驗嗎？（會清除本次作答）")){
+        startFresh();
+        startQuiz(false);
+      }
+    });
+
+    // 鍵盤操作（左右換題）
+    window.addEventListener("keydown", (e) => {
+      if(el.quizView.style.display === "none") return;
+      if(e.key === "ArrowLeft") gotoIdx(state.idx - 1);
+      if(e.key === "ArrowRight") gotoIdx(state.idx + 1);
+    });
+
+    // ====== 初始化 ======
+    renderTraits();
+    const hasSaved = loadFromStorage();
+    updateHomeButtons();
+    setView("home");
+    if(hasSaved){
+      el.pillState.textContent = "有作答紀錄";
+      showToast("偵測到本機作答紀錄，可按「繼續上次作答」。");
+    }
+  </script>
+</body>
+</html>
