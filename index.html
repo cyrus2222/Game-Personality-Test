@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>巴特爾遊戲人格測驗（八特質）</title>
-  <meta name="description" content="參考巴特爾遊戲人格測驗：完成 34 題後，結算八種特質分數並可分享結果圖片。" />
+  <meta name="description" content="參考巴特爾遊戲人格測驗：完成 34 題後，結算八種特質分數。" />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <meta name="theme-color" content="#0f1115" />
   <meta property="og:title" content="巴特爾遊戲人格測驗（八特質）" />
-  <meta property="og:description" content="完成 34 題後結算八種特質分數，並可分享結果圖片。" />
+  <meta property="og:description" content="完成 34 題後結算八種特質分數。" />
   <meta property="og:image" content="logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="logo.png" />
@@ -326,16 +326,6 @@
       white-space:nowrap;
     }
     .shareRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
-    .imgOut{
-      margin-top: 12px;
-      display:none;
-    }
-    .imgOut img{
-      max-width: 100%;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
     .footerNote{
       margin-top: 14px;
       color: var(--muted);
@@ -353,7 +343,7 @@
     <header>
       <div class="brand">
         <h1>巴特爾遊戲人格測驗（八特質）</h1>
-        <p>本測驗參考了巴特爾遊戲人格測驗；一個人可以同時有多種取向，分數僅供參考。做完 34 題後會結算八種特質分數，並可把結果分享成圖片。</p>
+        <p>本測驗參考了巴特爾遊戲人格測驗；一個人可以同時有多種取向，分數僅供參考。做完 34 題後會結算八種特質分數。</p>
       </div>
       <div class="pill" aria-label="狀態資訊">
         <span class="mono" id="pillState">待開始</span>
@@ -369,7 +359,122 @@
             <span class="hint">完成後會顯示每項分數（0～16）</span>
           </div>
 
-          <div class="traits" id="traitsList"></div>
+          <div class="traits" id="traitsList">
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M8.2 12.3 5.4 9.6a2.2 2.2 0 0 0-3.1 3.1l4.2 4.2a2.2 2.2 0 0 0 3.1 0l2.0-2.0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.8 12.3 18.6 9.6a2.2 2.2 0 0 1 3.1 3.1l-4.2 4.2a2.2 2.2 0 0 1-3.1 0l-2.0-2.0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.7 14.7 12 12.4l2.3 2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                外交
+              </h3>
+              <p>為了功利、資訊或結交有能力而去交友，朋友範圍可能很廣</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 21s-7-4.4-9.2-8.8C1 8.9 3.2 6 6.4 6c1.7 0 3 .8 3.8 2 0 0 .9-2 3.8-2 3.2 0 5.4 2.9 3.6 6.2C19 16.6 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                交友
+              </h3>
+              <p>主打情感羈絆，不求朋友多，單純享受與朋友相處</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 4h10v4a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M7 8H5a2 2 0 0 0 2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M17 8h2a2 2 0 0 1-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 13v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                投機
+              </h3>
+              <p>單純想完成遊戲玩法，比如獲取神裝、衝排行榜、解成就等，傾向到處亂逛</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M8 6h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 12h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 18h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M3 6l1.2 1.2L6.8 4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 12l1.2 1.2 2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 18l1.2 1.2 2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                執行
+              </h3>
+              <p>比投機更落實於遊戲玩法，有目標、計較效率，有可能仰賴於實驗的攻略</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M10 2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M10 2v6l-5.5 9a3 3 0 0 0 2.6 5h9.8a3 3 0 0 0 2.6-5L14 8V2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M8.5 14h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                實驗
+              </h3>
+              <p>有目的的不斷研究遊戲內容，比如鑽漏洞、挖彩蛋、研究效益，也是許多攻略的產出</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                    <path d="M14.6 9.4 12.8 14.8 9.4 14.6 12 12l2.6-2.6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M12 3v2M21 12h-2M12 21v-2M3 12h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                冒險
+              </h3>
+              <p>靠直覺與隨機來探索，享受於試錯</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 8l7-5 7 5v4a7 7 0 0 1-7 7 7 7 0 0 1-7-7V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9.5 11.5 11 13l3.5-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                掌控
+              </h3>
+              <p>喜歡支配，有明確目的，比如喜歡帶領公會戰、當指揮或掌握遊戲內交易所</p>
+            </div>
+
+            <div class="trait">
+              <h3>
+                <span class="traitIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3a7 7 0 0 0-7 7c0 2.3 1.2 4.7 3.5 7.5l1.2 1.5h4.6l1.2-1.5C17.8 14.7 19 12.3 19 10a7 7 0 0 0-7-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16.5 6.5 20 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M11 11h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M10 14h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                搗蛋
+              </h3>
+              <p>享受對其他玩家引發混亂、惡搞、惡意攻擊玩家等，需要有其他人才可以搞事</p>
+            </div>
+          </div>
 
           <div class="divider"></div>
 
@@ -382,6 +487,11 @@
               <div class="label">作答</div>
               <div class="value">每題 <span class="mono">4</span> 選 <span class="mono">1</span></div>
             </div>
+            <div class="kpiItem">
+              <div class="label">無效判定</div>
+              <div class="value"><span class="mono">第1題選2</span> 或 <span class="mono">第34題選1</span></div>
+            </div>
+          </div>
 
           <div class="ctaRow">
             <button class="primary" id="startBtn">開始測驗</button>
@@ -429,10 +539,10 @@
         <div class="cardInner">
           <div class="sectionTitle">
             <h2>結算結果</h2>
-            <span class="hint">可下載/分享成圖片</span>
+            <span class="hint">顯示八種特質分數</span>
           </div>
 
-          <div class="resultCard" id="shareCard" aria-label="可分享的結果卡片">
+          <div class="resultCard" id="shareCard" aria-label="結果卡片">
             <div class="resultHeader">
               <div>
                 <h2>你的八特質分數</h2>
@@ -445,74 +555,62 @@
           </div>
 
           <div class="shareRow">
-            <button class="primary" id="shareImgBtn">產生分享圖片（PNG）</button>
-            <button class="ghost" id="downloadImgBtn" disabled>下載圖片</button>
-            <button class="ghost" id="copyImgBtn" disabled>複製圖片到剪貼簿</button>
             <button class="ghost" id="restartBtn">再測一次</button>
-          </div>
-
-          <div class="imgOut" id="imgOut">
-            <div class="small muted">預覽（你也可以右鍵另存）</div>
-            <div style="height:8px"></div>
-            <img id="imgPreview" alt="測驗結果分享圖片預覽" />
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- 產生圖片用（本地端繪製，不上傳） -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
-
   <script>
     // ====== 資料：特質解說 ======
     const TRAITS = [
       {
         key: "diplomat",
-        name: "外交者",
-        desc: "為了功利、資訊或結交有能力者而去交友，朋友範圍可能很廣",
+        name: "外交",
+        desc: "為了功利、資訊或結交有能力而去交友，朋友範圍可能很廣",
         color: "linear-gradient(90deg, rgba(124,92,255,.95), rgba(124,92,255,.45))"
       },
       {
         key: "friend",
-        name: "交友者",
+        name: "交友",
         desc: "主打情感羈絆，不求朋友多，單純享受與朋友相處",
         color: "linear-gradient(90deg, rgba(53,208,186,.95), rgba(53,208,186,.45))"
       },
       {
         key: "opportunist",
-        name: "投機者",
-        desc: "單純想完成遊戲玩法（神裝、排行榜、成就等），傾向到處亂逛，遇到就破解",
+        name: "投機",
+        desc: "單純想完成遊戲玩法，比如獲取神裝、衝排行榜、解成就等，傾向到處亂逛",
         color: "linear-gradient(90deg, rgba(255,194,71,.95), rgba(255,194,71,.40))"
       },
       {
         key: "executor",
-        name: "執行者",
-        desc: "更落實於玩法且重效率；有目標、計較效益，可能仰賴實驗者攻略",
+        name: "執行",
+        desc: "比投機更落實於遊戲玩法，有目標、計較效率，有可能仰賴於實驗的攻略",
         color: "linear-gradient(90deg, rgba(82,154,255,.95), rgba(82,154,255,.40))"
       },
       {
         key: "experimenter",
-        name: "實驗者",
-        desc: "有目的地研究遊戲內容：鑽漏洞、挖彩蛋、研究效益，也是攻略產出者",
+        name: "實驗",
+        desc: "有目的的不斷研究遊戲內容，比如鑽漏洞、挖彩蛋、研究效益，也是許多攻略的產出",
         color: "linear-gradient(90deg, rgba(255,119,214,.95), rgba(255,119,214,.40))"
       },
       {
         key: "adventurer",
-        name: "冒險者",
+        name: "冒險",
         desc: "靠直覺與隨機探索，享受於試錯",
         color: "linear-gradient(90deg, rgba(124,255,159,.95), rgba(124,255,159,.35))"
       },
       {
         key: "controller",
-        name: "掌控者",
-        desc: "喜歡支配、有明確目的：帶領公會戰、當指揮或掌握交易所",
+        name: "掌控",
+        desc: "喜歡支配，有明確目的，比如喜歡帶領公會戰、當指揮或掌握遊戲內交易所",
         color: "linear-gradient(90deg, rgba(255,102,102,.95), rgba(255,102,102,.35))"
       },
       {
         key: "destroyer",
-        name: "破壞者",
-        desc: "享受引發混亂、惡搞、擊殺等；需要存在其他玩家才有事可做（通常比例不高）",
+        name: "搗蛋",
+        desc: "享受對其他玩家引發混亂、惡搞、擊殺等，需要有其他人才可以搞事",
         color: "linear-gradient(90deg, rgba(180,180,180,.95), rgba(180,180,180,.35))"
       }
     ];
@@ -529,8 +627,8 @@
       { id: 8,  title: "題目8。遊戲伺服器延遲。你會怎麼反應？", options: ["前往論壇與其他玩家交換情報。","在語音群組與好友聊天等待修復。","關掉去玩別的遊戲。","整理接下來的角色成長計畫。"] },
       { id: 9,  title: "題目9。遇見新手求助。你採取什麼行動？", options: ["提供幫助並順勢邀請對方加入公會。","熱心陪伴對方解任務並互加好友。","告訴對方下一步好做的事情。","傳送最完整的攻略文章給對方閱讀。"] },
       { id: 10, title: "題目10。探索全新地圖。你優先執行什麼？", options: ["測試地圖是否存在漏洞。","憑直覺選擇一條路線開始探索。","指揮隊伍有條理地推進探索進度。","引導怪物走向其他玩家以觀察互動。"] },
-      { id: 11, title: "題目11。獲得未知技能。你如何測試效果？", options: ["記錄每次施放的詳細傷害數據。","立刻尋找周圍怪物直接施放。","思考如何將此技能排進團隊戰術。","對陌生玩家施放以觀察非預期效果。"] },
-      { id: 12, title: "題目12。參與大型團隊戰。你扮演什麼角色？", options: ["嘗試前人未見的奇異裝備組合。","不依賴地圖並憑直覺支援隊友。","擔任指揮官調度全場玩家行動。","採取非典型戰術製造對手預期外的變數。"] },
+      { id: 11, title: "題目11。獲得新技能。你如何測試效果？", options: ["記錄每次施放的詳細傷害數據。","立刻尋找周圍怪物直接施放。","思考如何將此技能排進團隊戰術。","對其他玩家施放來觀察他的反應。"] },
+      { id: 12, title: "題目12。參與大型團隊戰。你扮演什麼角色？", options: ["嘗試前人未見的奇異裝備組合。","不依賴地圖並憑直覺支援隊友。","擔任指揮官調度全場玩家行動。","採取非典型戰術製造變數。"] },
       { id: 13, title: "題目13。參與遊戲內經濟系統。你採取什麼策略？", options: ["測試物價波動的極限與系統機制。","隨心所欲進行買賣而不計較金幣。","壟斷特定物資以掌控全伺服器市場。","大量拋售物資使價格崩盤。"] },
       { id: 14, title: "題目14。遭遇系統Bug。你作何反應？", options: ["反覆測試Bug的完整觸發條件。","覺得有趣並直接忽略該狀況繼續遊玩。","聯繫官方回報並要求全服補償。","運用系統漏洞介入他人的遊戲進程。"] },
       { id: 15, title: "題目15。角色達到滿級。你設定什麼新目標？", options: ["找出所有隱藏的系統機制。","踏遍地圖上每一個未知的角落。","成為伺服器中有影響力的人。","在野外主動發起無預警的玩家對抗。"] },
@@ -541,30 +639,30 @@
       { id: 20, title: "題目20。遇見需要大家搶貨的稀有商人。你採取什麼行動？", options: ["將商人座標分享給公會幹部。","買下所有自身需要的物品後離開。","測試商人是否會刷新其他隱藏物品。","派人封鎖該區域不讓其他玩家靠近。"] },
       { id: 21, title: "題目21。官方削弱你的職業。你如何反應？", options: ["向其他職業的玩家請教其他職業。","直接轉換至當前版本最強的職業。","研究削弱變化。","帶領群眾向官方抗議並要求撤回改動。"] },
       { id: 22, title: "題目22。舉辦個人活動。你會怎麼規劃？", options: ["邀請各路好手參與以擴展人脈。","設置豐厚獎勵吸引大量人潮參與。","設計規則繁瑣且具實驗性質的競賽。","訂定嚴格規範並親自擔任最高裁判。"] },
-      { id: 23, title: "題目23。選擇陣營。你考量什麼條件？", options: ["選擇最多知名玩家加入的陣營。","選擇勝率最高且獎勵最豐厚的陣營。","選擇人數最少以測試弱勢加成機制。","選擇能讓你順利當上領袖的陣營。"] },
+      { id: 23, title: "題目23。選擇陣營。你考量什麼條件？", options: ["選擇最多知名玩家加入的陣營。","選擇勝率最高且獎勵最豐厚的陣營。","選擇人數最少以測試弱勢狀況。","選擇能讓你順利當上領袖的陣營。"] },
       { id: 24, title: "題目24。獲得多餘資源。你如何處置？", options: ["拿去與其他人交易。","出售換取金幣。","嘗試合成以期產出未知的道具。","存放在公會金庫並進行統一管理。"] },
       { id: 25, title: "題目25。看見兩大公會爆發衝突。你採取什麼行動？", options: ["居中協調並試圖獲取雙方信任。","趁亂撿取掉落的稀有裝備與物資。","觀察雙方運用的戰略與技能組合。","暗中支持一方以改變伺服器勢力版圖。"] },
       { id: 26, title: "題目26。週末上線計畫。你安排什麼行程？", options: ["與好友在風景優美的地方掛機聊天。","按表操課完成所有每週限定任務。","沒有既定計畫且想到哪就去哪。","尋找正在解任務的玩家並進行干預。"] },
-      { id: 27, title: "題目27。佈置個人房屋。你重視什麼元素？", options: ["營造溫馨空間讓親友隨時來作客。","只放置能增加角色數值的傢俱。","隨意擺放只要當下看得順眼即可。","在房屋周圍設置意想不到的干擾機關。"] },
+      { id: 27, title: "題目27。佈置個人房屋。你重視什麼元素？", options: ["營造溫馨空間讓親友隨時來作客。","只放置對角色戰鬥有幫助的傢俱。","隨性擺放，只要當下看得順眼即可。","在房屋周圍設置意想不到的干擾機關。"] },
       { id: 28, title: "題目28。選擇坐騎。你偏好哪種外觀？", options: ["好友們都擁有的同款兄弟坐騎。","移動速度最快且最節省時間的坐騎。","長相最奇特且充滿隨機元素的坐騎。","視覺風格強烈且引人注目的坐騎。"] },
-      { id: 29, title: "題目29。收到隨機組隊邀請。你如何決定？", options: ["只要是好友邀請就立刻答應加入。","先確認隊伍的職業配置與明確目標。","直接加入看看會發生什麼有趣的事。","加入隊伍並嘗試常規外的戰鬥風格。"] },
+      { id: 29, title: "題目29。收到組隊邀請。你如何決定？", options: ["只要是好友邀請就立刻答應加入。","先確認隊伍的職業配置與明確目標。","直接加入看看會發生什麼事。","加入隊伍並嘗試常規外的戰鬥風格。"] },
       { id: 30, title: "題目30。購買時裝。你挑選什麼風格？", options: ["購買能與好友搭配的情侶裝或團體服。","拒絕購買對戰鬥力沒有實質幫助的時裝。","隨意購買一件當下覺得好看的服飾。","穿著風格特異的服裝引發他人關注。"] },
-      { id: 31, title: "題目31。參與語音頻道。你展現什麼發言習慣？", options: ["專注於與熟悉的親友進行交流。","專注於溝通戰術與回報敵人位置。","聽到有趣的對話就隨性插話互動。","播放特殊音效觀察頻道的群體反應。"] },
-      { id: 32, title: "題目32。參與野外首領戰。你專注於什麼操作？", options: ["留在安全區域幫好友補血打氣。","精準計算傷害以搶奪最後一擊獎勵。","不管機制直接上前展開攻擊。","干預首領的攻擊目標以製造戰局變數。"] },
-      { id: 33, title: "題目33。遊戲即將關閉伺服器。你進行什麼最後儀式？", options: ["與所有好友合影留念並互道再見。","將所有資源消耗完畢結算最終戰力。","走向地圖上從未涉足的偏僻角落。","在人口密集區引發大規模的非常規事件。"] },
+      { id: 31, title: "題目31。參與語音頻道。你展現什麼發言習慣？", options: ["與熟悉的親友進行交流。","溝通戰術。","聽到有趣的對話就隨性插話。","播放特殊音效觀察大家反應。"] },
+      { id: 32, title: "題目32。參與野外首領戰。你專注於什麼操作？", options: ["留在安全區域幫好友補血打氣。","精準計算傷害以搶奪最後一擊獎勵。","不管機制直接上前展開攻擊。","在旁邊納涼，等待其他玩家擊殺首領。"] },
+      { id: 33, title: "題目33。遊戲即將關閉伺服器。你想怎麼告別？", options: ["與所有好友合影留念並互道再見。","將所有資源消耗完畢結算最終戰力。","走向地圖上從未涉足的偏僻角落。","在人口密集區引發大規模的非常規事件。"] },
       { id: 34, title: "題目34。你如何填寫這份測驗？", options: ["完全不看題目隨機亂選。","依據自身真實想法選擇。","仔細思考每個選項。","憑直覺快速選擇。"] },
     ];
 
     // ====== 計分規則（題號區間 + 選項號） ======
     // 選項號：1～4
-    // 外交者：2-9 選1 + 18-25 選1
-    // 交友者：2-9 選2 + 26-33 選1
-    // 投機者：2-9 選3 + 18-25 選2
-    // 執行者：2-9 選4 + 26-33 選2
-    // 實驗者：10-17 選1 + 18-25 選3
-    // 冒險者：10-17 選2 + 26-33 選3
-    // 掌控者：10-17 選3 + 18-25 選4
-    // 破壞者：10-17 選4 + 26-33 選4
+    // 外交：2-9 選1 + 18-25 選1
+    // 交友：2-9 選2 + 26-33 選1
+    // 投機：2-9 選3 + 18-25 選2
+    // 執行：2-9 選4 + 26-33 選2
+    // 實驗：10-17 選1 + 18-25 選3
+    // 冒險：10-17 選2 + 26-33 選3
+    // 掌控：10-17 選3 + 18-25 選4
+    // 搗蛋：10-17 選4 + 26-33 選4
     const SCORE_RULES = [
       { trait:"diplomat",     ranges: [{from:2,to:9, pick:1},{from:18,to:25,pick:1}] },
       { trait:"friend",       ranges: [{from:2,to:9, pick:2},{from:26,to:33,pick:1}] },
@@ -582,7 +680,6 @@
     const state = {
       answers: Array(QUESTIONS.length).fill(null), // 每題存 1~4，或 null
       idx: 0, // 0-based
-      lastGeneratedPng: null, // dataUrl
     };
 
     // ====== DOM ======
@@ -611,13 +708,8 @@
       resultBadge: document.getElementById("resultBadge"),
       resultSubtitle: document.getElementById("resultSubtitle"),
       resultFoot: document.getElementById("resultFoot"),
-      shareImgBtn: document.getElementById("shareImgBtn"),
-      downloadImgBtn: document.getElementById("downloadImgBtn"),
-      copyImgBtn: document.getElementById("copyImgBtn"),
       restartBtn: document.getElementById("restartBtn"),
       shareCard: document.getElementById("shareCard"),
-      imgOut: document.getElementById("imgOut"),
-      imgPreview: document.getElementById("imgPreview"),
     };
 
     function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
@@ -769,7 +861,7 @@
       el.progressBar.style.width = `${pct.toFixed(2)}%`;
 
       el.prevBtn.disabled = state.idx === 0;
-      el.nextBtn.disabled = state.idx === QUESTIONS.length - 1;
+      el.nextBtn.disabled = (state.idx === QUESTIONS.length - 1) || (saved == null);
       el.finishBtn.disabled = !isAllAnswered();
 
       el.choices.innerHTML = "";
@@ -801,6 +893,7 @@
       el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
       el.qSaved.textContent = `已選：${value}`;
       el.finishBtn.disabled = !isAllAnswered();
+      el.nextBtn.disabled = (state.idx === QUESTIONS.length - 1);
       const pct = (answeredCount() / QUESTIONS.length) * 100;
       el.progressBar.style.width = `${pct.toFixed(2)}%`;
     }
@@ -877,14 +970,7 @@
       const invalidHint = invalid
         ? `無效原因：${state.answers[0]===2 ? "第1題選到「2」" : ""}${(state.answers[0]===2 && state.answers[33]===1) ? "；" : ""}${state.answers[33]===1 ? "第34題選到「1」" : ""}。`
         : "此結果僅供參考；你可能同時具有多種取向。";
-      el.resultFoot.textContent = invalidHint + "（分享圖片不會上傳到伺服器）";
-
-      // reset share outputs
-      state.lastGeneratedPng = null;
-      el.downloadImgBtn.disabled = true;
-      el.copyImgBtn.disabled = true;
-      el.imgOut.style.display = "none";
-      el.imgPreview.removeAttribute("src");
+      el.resultFoot.textContent = invalidHint;
 
       setView("result");
     }
@@ -896,94 +982,9 @@
       el.pillProgress.textContent = `${answeredCount()} / ${QUESTIONS.length}`;
     }
 
-    async function ensureHtml2Canvas(){
-      // 等待 defer 的 html2canvas 載入
-      const start = Date.now();
-      while(typeof window.html2canvas !== "function"){
-        if(Date.now() - start > 5000) throw new Error("圖片產生工具載入失敗（html2canvas）");
-        await new Promise(r => setTimeout(r, 50));
-      }
-    }
-
-    function dataUrlToBlob(dataUrl){
-      const [meta, b64] = dataUrl.split(",");
-      const mime = (meta.match(/data:(.*?);base64/) || [])[1] || "image/png";
-      const bin = atob(b64);
-      const len = bin.length;
-      const arr = new Uint8Array(len);
-      for(let i=0;i<len;i++) arr[i] = bin.charCodeAt(i);
-      return new Blob([arr], { type: mime });
-    }
-
-    async function generateShareImage(){
-      await ensureHtml2Canvas();
-
-      // 避免外框陰影影響截圖邊界：複製一份到離屏容器
-      const off = document.createElement("div");
-      off.style.position = "fixed";
-      off.style.left = "-99999px";
-      off.style.top = "0";
-      off.style.width = "1060px";
-      off.style.padding = "20px";
-      off.style.background = "linear-gradient(180deg, #0b1020, #070b17)";
-      off.style.color = "white";
-      off.style.fontFamily = getComputedStyle(document.body).fontFamily;
-      off.style.zIndex = "999999";
-
-      const clone = el.shareCard.cloneNode(true);
-      clone.style.boxShadow = "none";
-      clone.style.background = "linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))";
-      clone.style.border = "1px solid rgba(255,255,255,.14)";
-      off.appendChild(clone);
-      document.body.appendChild(off);
-
-      const canvas = await window.html2canvas(clone, {
-        backgroundColor: null,
-        scale: Math.min(2, window.devicePixelRatio || 1.5),
-        useCORS: true
-      });
-      document.body.removeChild(off);
-
-      const dataUrl = canvas.toDataURL("image/png");
-      state.lastGeneratedPng = dataUrl;
-      el.imgPreview.src = dataUrl;
-      el.imgOut.style.display = "";
-      el.downloadImgBtn.disabled = false;
-      el.copyImgBtn.disabled = false;
-      showToast("已產生 PNG，下面可預覽/下載/複製。");
-    }
-
-    function downloadShareImage(){
-      if(!state.lastGeneratedPng) return;
-      const a = document.createElement("a");
-      const now = new Date();
-      const file = `巴特爾人格測驗_結果_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,"0")}${String(now.getDate()).padStart(2,"0")}_${String(now.getHours()).padStart(2,"0")}${String(now.getMinutes()).padStart(2,"0")}.png`;
-      a.href = state.lastGeneratedPng;
-      a.download = file;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    async function copyShareImage(){
-      if(!state.lastGeneratedPng) return;
-      try{
-        const blob = dataUrlToBlob(state.lastGeneratedPng);
-        if(!navigator.clipboard || typeof window.ClipboardItem !== "function"){
-          showToast("此瀏覽器不支援直接複製圖片，請改用下載。", "danger");
-          return;
-        }
-        await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-        showToast("已複製圖片到剪貼簿。");
-      }catch(err){
-        showToast("複製失敗（可能需要 HTTPS 或瀏覽器權限）。請改用下載。", "danger");
-      }
-    }
-
     function startFresh(){
       state.answers = Array(QUESTIONS.length).fill(null);
       state.idx = 0;
-      state.lastGeneratedPng = null;
       clearStorage();
       updateHomeButtons();
       setView("home");
@@ -1028,22 +1029,7 @@
       }
       renderResults();
     });
-
-    el.shareImgBtn.addEventListener("click", async () => {
-      try{
-        el.shareImgBtn.disabled = true;
-        el.shareImgBtn.textContent = "產生中…";
-        await generateShareImage();
-      }catch(err){
-        showToast(String(err?.message || err || "產生圖片失敗"), "danger");
-      }finally{
-        el.shareImgBtn.disabled = false;
-        el.shareImgBtn.textContent = "產生分享圖片（PNG）";
-      }
-    });
-    el.downloadImgBtn.addEventListener("click", downloadShareImage);
-    el.copyImgBtn.addEventListener("click", copyShareImage);
-
+狀況狀況
     el.restartBtn.addEventListener("click", () => {
       if(confirm("要重新開始測驗嗎？（會清除本次作答）")){
         startFresh();
